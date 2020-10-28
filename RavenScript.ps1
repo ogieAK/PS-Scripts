@@ -1,7 +1,8 @@
 #                           (477th Cyber Flight)
 #                   POC:  TSgt Overgaauw, DSN:  551-2666
 #                    Created Aug 19 || Modified Aug 19
-
+$CR = "`r`n"
+$failedd = ""
 $computers = gc "\\elfs2\ELWEB\Remote_Install_Scripts\477FG\computers.txt"
 $destination = "C$\Remote_Install"
 $Source = "\\elfs2\ELWEB\Remote_Install_Scripts\_Files\McAfeeFrameworkFiles"
@@ -48,6 +49,9 @@ function Show-Menu
               '1' {
                  cls
                  foreach ($computer in $computers) {
+   ##Loud but much faster than test connection
+    #{$string = "";$string = get-netadapterbinding -cimsession $computer -componentID ms_tcpip6;if ($string){$string = ""}else{ if($failedd -eq ""){$failedd = $computer}else{$failedd = $failedd +CR+$computer}}$string=""
+   ##$failedd is now an array of failed machines that can be written to the console or pushed to a file. Clear $failedd variable before pause though.
                     If (Test-connection -Cn $computer -ErrorAction SilentlyContinue) {
                         Write-Host -ForegroundColor Green "Ping successful for $computer"}
                     Else {
