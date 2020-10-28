@@ -10,3 +10,4 @@ ForEach ($computer in $PCLIST) {
     }
 
 }
+#what kind of data might you desire to collect?
